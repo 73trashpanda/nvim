@@ -11,10 +11,15 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
 	debug = false,
 	sources = {
-		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+    formatting.prettier.with {
+      extra_filetypes = { "toml" },
+      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+    },
+    formatting.shfmt,
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
-    diagnostics.php.with({ extra_args = {"-l", "-d", "display_errors=STDERR", "-d", " log_errors=Off"} })
-    -- diagnostics.flake8
+    diagnostics.php.with({ extra_args = {"-l", "-d", "display_errors=STDERR", "-d", " log_errors=Off"} }),
+    diagnostics.eslint,
+    diagnostics.shellckeck,
 	},
 })
