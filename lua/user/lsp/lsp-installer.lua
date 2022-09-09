@@ -12,6 +12,10 @@ local servers = {
   "bashls",
   "jsonls",
   "yamlls",
+  "angularls",
+  "dockerls",
+  "phpactor",
+  "sqls",
 }
 
 lsp_installer.setup()
