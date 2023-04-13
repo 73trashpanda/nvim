@@ -1,0 +1,5 @@
+-- require("jg.packer")
+require("jg.lazy")
+require("jg.options")
+require("jg.keymaps")
+require("jg.lsp")
