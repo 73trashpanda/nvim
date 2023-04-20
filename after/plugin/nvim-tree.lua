@@ -190,8 +190,8 @@ nvimtree.setup({
     args = {},
   },
   diagnostics = {
-    enable = false,
-    show_on_dirs = false,
+    enable = true,
+    show_on_dirs = true,
     show_on_open_dirs = true,
     debounce_delay = 50,
     severity = {
@@ -225,7 +225,7 @@ nvimtree.setup({
     timeout = 400,
   },
   modified = {
-    enable = false,
+    enable = true,
     show_on_dirs = true,
     show_on_open_dirs = true,
   },
@@ -250,7 +250,7 @@ nvimtree.setup({
       },
     },
     open_file = {
-      quit_on_open = false,
+      quit_on_open = true,
       resize_window = true,
       window_picker = {
         enable = true,

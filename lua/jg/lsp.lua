@@ -1,5 +1,6 @@
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
+
 local on_attach = function(_, bufnr)
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
@@ -41,6 +42,7 @@ local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
 	end, { desc = "Format current buffer with LSP" })
+
 end
 
 -- Enable the following language servers
@@ -58,7 +60,7 @@ local servers = {
 	lua_ls = {
 		Lua = {
 			diagnostics = {
-				globals = {'vim'},
+				globals = { 'vim' },
 			},
 			workspace = { checkThirdParty = false },
 			telemetry = { enable = false },
@@ -68,13 +70,17 @@ local servers = {
 	lemminx = {},
 	jsonls = {},
 	html = {},
-	angularls = {},
+	angularls = {
+		-- cmd = { "ngserver", "--stdio" },
+		-- filetypes = { "html", "css", "typescript", "typescriptreact", "typescript.tsx" },
+	},
 	astro = {},
 	cssls = {},
+	tailwindcss = {},
 	dockerls = {},
-
+	docker_compose_language_service = {},
 	jdtls = {},
-
+	azure_pipelines_ls = {},
 }
 
 -- Setup neovim lua configuration
