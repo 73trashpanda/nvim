@@ -4,6 +4,8 @@
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.o.tabstop = 4
+vim.o.shiftwidth = 2
 
 -- Turn of word wrap
 vim.opt.wrap = false

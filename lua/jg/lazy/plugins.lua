@@ -21,6 +21,12 @@ local plugins = {
 		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+	},
 
 	{
 		-- LSP Configuration & Plugins
@@ -50,7 +56,6 @@ local plugins = {
 	{
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
-		lazy = true,
 		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 	},
 	{
@@ -140,9 +145,9 @@ local plugins = {
 		"zbirenbaum/copilot-cmp",
 		dependencies = {
 			"zbirenbaum/copilot.lua",
-			event = "VeryLazy",
 		},
 		lazy = true,
+		branch = "formatting-fixes",
 	},
 	{
 		"jackMort/ChatGPT.nvim",
@@ -172,6 +177,9 @@ local plugins = {
 	},
 	{
 		"christoomey/vim-tmux-runner",
+	},
+	{
+		"tpope/vim-obsession",
 	},
 }
 
