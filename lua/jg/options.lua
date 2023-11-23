@@ -39,3 +39,6 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- Enable nocompatible mode
 vim.opt.compatible = false
+
+-- Column
+vim.opt.colorcolumn = "80"

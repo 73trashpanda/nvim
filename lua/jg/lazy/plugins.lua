@@ -40,14 +40,12 @@ local plugins = {
 			{
 				"j-hui/fidget.nvim",
 				lazy = true,
+				tag = "legacy",
 			},
 
 			-- Additional lua configuration, makes nvim stuff amazing
 			"folke/neodev.nvim",
 		},
-	},
-	{
-		"jose-elias-alvarez/null-ls.nvim",
 	},
 	{
 		"folke/trouble.nvim",
@@ -87,18 +85,14 @@ local plugins = {
 		lazy = true,
 	},
 	{
-		"tpope/vim-rhubarb",
-		lazy = true,
-	},
-	{
 		"lewis6991/gitsigns.nvim",
 		lazy = true,
 	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		lazy = true,
 	},
+	{ "arkav/lualine-lsp-progress", lazy = true },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		lazy = true,
@@ -140,14 +134,42 @@ local plugins = {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = {
-			"zbirenbaum/copilot.lua",
-		},
-		lazy = true,
-		branch = "formatting-fixes",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					auto_trigger = true,
+					keymap = {
+						accept = "<M-a>",
+						accept_line = "<M-l>",
+						accept_word = "M-w",
+					},
+				},
+				panel = {
+					enabled = true,
+					auto_refresh = false,
+				},
+				filetypes = {
+					yaml = false,
+					terraform = false,
+					markdown = false,
+					help = false,
+					gitcommit = false,
+					gitrebase = false,
+					hgcommit = false,
+					svn = false,
+					cvs = false,
+					["."] = false,
+					sh = function()
+						if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+							-- disable for .env files
+							return false
+						end
+						return true
+					end,
+				},
+			})
+			vim.cmd("Copilot disable")
+		end,
 	},
 	{
 		"jackMort/ChatGPT.nvim",
@@ -170,17 +192,22 @@ local plugins = {
 		"folke/zen-mode.nvim",
 		keys = { "<leader>z", mode = "n" },
 	},
-
-	-- Tmux
+	{ "ThePrimeagen/harpoon" },
 	{
-		"christoomey/vim-tmux-navigator",
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end
 	},
 	{
-		"christoomey/vim-tmux-runner",
-	},
-	{
-		"tpope/vim-obsession",
-	},
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		opts = {} -- this is equalent to setup({}) function
+	}
 }
 
 return plugins

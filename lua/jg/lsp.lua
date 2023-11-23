@@ -63,7 +63,8 @@ local servers = {
 			},
 		},
 	},
-	tsserver = {},
+	tsserver = {
+},
 	ltex = {},
 	marksman = {},
 	intelephense = {},

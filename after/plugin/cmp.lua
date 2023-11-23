@@ -6,23 +6,12 @@ if not pcall(require, "luasnip") then
 	return
 end
 
-if not pcall(require, "copilot_cmp") then
-	return
-end
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local copilot_cmp = require("copilot_cmp")
 
 luasnip.config.setup({})
 
-copilot_cmp.setup({
-	formatters = {
-		label = require("copilot_cmp.format").format_label_text,
-		insert_text = require("copilot_cmp.format").format_insert_text,
-		preview = require("copilot_cmp.format").deindent,
-	},
-})
 
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -68,7 +57,6 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 	sources = {
-		{ name = "copilot" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 	},

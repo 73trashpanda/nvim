@@ -58,3 +58,5 @@ vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>',
 -- Exit terminal mode with Esc
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal-mode', noremap = true, silent = true })
 
+-- Close all buffers except buffer in focus
+vim.api.nvim_set_keymap('n', '<leader>bc', [[:execute '%bd | edit# | bd#<CR>]], { noremap = true, silent = true, desc = 'Close all buffers except buffer in focus' })
