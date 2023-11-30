@@ -81,6 +81,10 @@ local plugins = {
 
 	-- Git related plugins
 	{
+		'f-person/git-blame.nvim',
+		lazy = true
+	},
+	{
 		"tpope/vim-fugitive",
 		lazy = true,
 	},
@@ -95,7 +99,7 @@ local plugins = {
 	{ "arkav/lualine-lsp-progress", lazy = true },
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		main="ibl",
+		main = "ibl",
 		lazy = true,
 	},
 	{
