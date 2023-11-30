@@ -51,9 +51,6 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
--- Toggle NvimTree
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>',
-	{ desc = 'Open NvimTree', noremap = true, silent = true })
 
 -- Exit terminal mode with Esc
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal-mode', noremap = true, silent = true })

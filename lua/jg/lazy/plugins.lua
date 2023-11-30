@@ -95,6 +95,7 @@ local plugins = {
 	{ "arkav/lualine-lsp-progress", lazy = true },
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main="ibl",
 		lazy = true,
 	},
 	{
@@ -122,11 +123,6 @@ local plugins = {
 				cond = vim.fn.executable("make") == 1,
 			},
 		},
-	},
-
-	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	-- AI related plugins
