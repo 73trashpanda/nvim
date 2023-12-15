@@ -1,26 +1,4 @@
 local plugins = {
-	-- the colorscheme should be available when starting Neovim
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-	},
-	{
-		"lunarvim/darkplus.nvim",
-		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-	},
-	{
-		"rose-pine/neovim",
-		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		name = "rose-pine",
-	},
-	{
-		"rebelot/kanagawa.nvim",
-		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-	},
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -133,43 +111,6 @@ local plugins = {
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				suggestion = {
-					auto_trigger = true,
-					keymap = {
-						accept = "<M-a>",
-						accept_line = "<M-l>",
-						accept_word = "M-w",
-					},
-				},
-				panel = {
-					enabled = true,
-					auto_refresh = false,
-				},
-				filetypes = {
-					yaml = false,
-					terraform = false,
-					markdown = false,
-					help = false,
-					gitcommit = false,
-					gitrebase = false,
-					hgcommit = false,
-					svn = false,
-					cvs = false,
-					["."] = false,
-					sh = function()
-						if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
-							-- disable for .env files
-							return false
-						end
-						return true
-					end,
-				},
-			})
-			vim.cmd("Copilot disable")
-		end,
 	},
 	{
 		"jackMort/ChatGPT.nvim",
@@ -180,6 +121,9 @@ local plugins = {
 			"nvim-telescope/telescope.nvim",
 		},
 	},
+	{ "David-Kunz/gen.nvim" },
+
+	-- Misc
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = "VeryLazy",
@@ -207,6 +151,25 @@ local plugins = {
 		'windwp/nvim-autopairs',
 		event = "InsertEnter",
 		opts = {} -- this is equalent to setup({}) function
+	},
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*", -- recommended, use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+		-- event = {
+		--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+		--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+		--   "BufReadPre path/to/my-vault/**.md",
+		--   "BufNewFile path/to/my-vault/**.md",
+		-- },
+		dependencies = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+
+			-- see below for full list of optional dependencies 👇
+		},
 	}
 }
 

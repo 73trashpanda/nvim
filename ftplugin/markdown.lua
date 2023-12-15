@@ -1,5 +1,7 @@
 -- Enable word wrap for Markdown files
 vim.opt_local.wrap = true
+vim.opt_local.textwidth = 80
+vim.opt_local.formatoptions:append("tcqawjp]")
 
 -- Enable auto-indentation
 vim.opt_local.autoindent = true
