@@ -2,6 +2,7 @@
 vim.opt_local.wrap = true
 vim.opt_local.textwidth = 80
 vim.opt_local.formatoptions:append("tcqawjp]")
+vim.opt_local.colorcolumn = ""
 
 -- Enable auto-indentation
 vim.opt_local.autoindent = true
@@ -14,3 +15,4 @@ vim.opt_local.breakat = [[\ \	;:,!?]]
 
 -- Set the margin as the text width for word wrap
 vim.opt_local.textwidth = margin
+
