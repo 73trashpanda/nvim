@@ -6,6 +6,9 @@ vim.o.shiftwidth = 4
 
 vim.opt.termguicolors = true
 
+-- netrw
+vim.g.netrw_banner = 0 -- gets rid of the annoying banner for netrw
+
 -- Turn of word wrap
 vim.opt.wrap = false
 
@@ -41,3 +44,13 @@ vim.opt.compatible = false
 
 -- Column
 vim.opt.colorcolumn = "80"
+
+vim.opt.conceallevel = 1
+
+vim.opt.scrolloff = 10
+vim.opt.showmatch = true
+vim.opt.list = true
+vim.opt.listchars = {
+	eol = '↵',
+	tab = '» ',
+}

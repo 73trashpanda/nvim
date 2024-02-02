@@ -43,6 +43,17 @@ local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		vim.lsp.buf.format()
 	end, { desc = "Format current buffer with LSP" })
+
+
+	vim.api.nvim_create_augroup("formatlspautogroup", { clear = true })
+
+	vim.api.nvim_create_autocmd("bufwritepre", {
+		group = "formatlspautogroup",
+		buffer = bufnr,
+		callback = function()
+			vim.lsp.buf.format({ bufnr = bufnr })
+		end,
+	})
 end
 
 -- Enable the following language servers
@@ -51,6 +62,16 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+	gopls = {
+		filestypes = { "go", "gomod", "gowork", "gotmpl" },
+		gopls = {
+			completeUnimported = true,
+			usePlaceholders = true,
+			analyses = {
+				unusedparams = true,
+			}
+		}
+	},
 	pyright = {
 		python = {
 			analysis = {
@@ -64,7 +85,7 @@ local servers = {
 		},
 	},
 	tsserver = {
-},
+	},
 	ltex = {},
 	marksman = {},
 	intelephense = {},

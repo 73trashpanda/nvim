@@ -5,8 +5,9 @@ end
 local catppuccin = require("catppuccin")
 
 catppuccin.setup({
-  flavour = "mocha",
-  transparent_background = true,
+	flavour = "mocha",
+	transparent_background = true,
+	integrations = {
+		fidget = true,
+	}
 })
-
-

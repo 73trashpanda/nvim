@@ -21,11 +21,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Copy/paste to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
 
 -- Copy current line and all lines below to system clipboard
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy current line and all lines below to system clipboard" })
+
+vim.keymap.set("n", "<leader>yb", [[%y+]], { desc = "[Y]ank [B]uffer to system clipboard" })
 
 -- Delete selected text and place it in the default register
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
@@ -33,12 +35,19 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- Format current buffer with language server
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
+-- Move selected line / block of text in visual mode up or down
+vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move selected line / block of text in visual block mode up" })
+vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", { desc = "Move selected line / block of text in visual block mode down" })
+vim.keymap.set("v", "K", ":move '<-2<CR>gv-gv", { desc = "Move selected line / block of text in visual mode up" })
+vim.keymap.set("v", "J", ":move '>+1<CR>gv-gv", { desc = "Move selected line / block of text in visual mode down" })
+
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize window up", noremap = true, silent = true })
 vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", { desc = "Resize window down", noremap = true, silent = true })
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Resize window left", noremap = true, silent = true })
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Resize window right", noremap = true, silent = true })
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>",
+	{ desc = "Resize window right", noremap = true, silent = true })
 
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", { desc = "Decrease visual selection indent", noremap = true })
@@ -56,4 +65,8 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal-mode', noremap = true, silent = true })
 
 -- Close all buffers except buffer in focus
-vim.api.nvim_set_keymap('n', '<leader>bc', [[:execute '%bd | edit# | bd#<CR>]], { noremap = true, silent = true, desc = 'Close all buffers except buffer in focus' })
+vim.api.nvim_set_keymap('n', '<leader>bc', [[:execute '%bd | edit# | bd#<CR>]],
+	{ noremap = true, silent = true, desc = 'Close all buffers except buffer in focus' })
+
+-- Open netrw
+vim.keymap.set("n", "<leader>e", ":E<CR>", { desc = "Open netrw", noremap = true })

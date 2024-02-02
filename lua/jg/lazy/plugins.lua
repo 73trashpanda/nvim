@@ -1,7 +1,6 @@
 local plugins = {
 	{
 		"catppuccin/nvim",
-		name = "catppuccin",
 		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 	},
@@ -14,17 +13,11 @@ local plugins = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 
-			-- ful status updates for LSP
-			{
-				"j-hui/fidget.nvim",
-				lazy = true,
-				tag = "legacy",
-			},
-
 			-- Additional lua configuration, makes nvim stuff amazing
 			"folke/neodev.nvim",
 		},
 	},
+	{ "mfussenegger/nvim-jdtls" },
 	{
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
@@ -32,7 +25,15 @@ local plugins = {
 	{
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-cmdline",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		},
 	},
 	{
 		-- Highlight, edit, and navigate code
@@ -41,20 +42,19 @@ local plugins = {
 		build = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		end,
-		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter-textobjects",
-				lazy = true,
-			},
-			{
-				"nvim-treesitter/nvim-treesitter-context",
-				lazy = true,
-			},
-			{
-				"elgiano/nvim-treesitter-angular",
-				branch = "topic/jsx-fix",
-			},
-		},
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		lazy = true,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		lazy = true,
+	},
+	{
+		"elgiano/nvim-treesitter-angular",
+		branch = "topic/jsx-fix",
 	},
 
 	-- Git related plugins
@@ -74,7 +74,7 @@ local plugins = {
 		"nvim-lualine/lualine.nvim",
 		lazy = true,
 	},
-	{ "arkav/lualine-lsp-progress", lazy = true },
+	-- { "arkav/lualine-lsp-progress", lazy = true },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -110,17 +110,10 @@ local plugins = {
 	-- AI related plugins
 	{
 		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
 		cmd = "Copilot",
 	},
-	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
+	{ "zbirenbaum/copilot-cmp" },
 	{ "David-Kunz/gen.nvim" },
 
 	-- Misc
@@ -137,21 +130,6 @@ local plugins = {
 		keys = { "<leader>z", mode = "n" },
 	},
 	{ "ThePrimeagen/harpoon" },
-	{
-		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end
-	},
-	{
-		'windwp/nvim-autopairs',
-		event = "InsertEnter",
-		opts = {} -- this is equalent to setup({}) function
-	},
 	{
 		"epwalsh/obsidian.nvim",
 		version = "*", -- recommended, use latest release instead of latest commit

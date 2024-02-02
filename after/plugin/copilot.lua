@@ -1,16 +1,10 @@
+if not pcall(require, "copilot") then
+	return
+end
+
 require("copilot").setup({
-	suggestion = {
-		auto_trigger = true,
-		keymap = {
-			accept = "<M-a>",
-			accept_word = "M-w",
-			accept_line = "<M-l>",
-		},
-	},
-	panel = {
-		enabled = true,
-		auto_refresh = false,
-	},
+	suggestion = { enabled = false },
+	panel = { enabled = false },
 	filetypes = {
 		yaml = false,
 		terraform = false,
@@ -31,7 +25,8 @@ require("copilot").setup({
 		end,
 	},
 })
-vim.cmd("Copilot disable")
 vim.g.copilot_enabled = false
 
-vim.api.nvim_set_keymap('n', '<leader>aco', ':lua if vim.g.copilot_enabled then vim.cmd("Copilot disable"); vim.g.copilot_enabled = false else vim.cmd("Copilot enable"); vim.g.copilot_enabled = true end<CR>', { noremap = true, silent = true, desc = "Toggle Copilot" })
+vim.api.nvim_set_keymap('n', '<leader>aco',
+	':lua if vim.g.copilot_enabled then vim.cmd("Copilot disable"); vim.g.copilot_enabled = false else vim.cmd("Copilot enable"); vim.g.copilot_enabled = true end<CR>',
+	{ noremap = true, silent = true, desc = "Toggle Copilot" })

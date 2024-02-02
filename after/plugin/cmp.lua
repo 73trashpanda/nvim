@@ -12,7 +12,6 @@ local luasnip = require("luasnip")
 
 luasnip.config.setup({})
 
-
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
 		return false
@@ -28,36 +27,54 @@ cmp.setup({
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
+		["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+		["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif cmp.visible() and has_words_before() then
-				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+		["<C-y>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<c-y>"] = cmp.mapping(
+			cmp.mapping.confirm {
+				behavior = cmp.ConfirmBehavior.Insert,
+				select = true,
+			},
+			{ "i", "c" }
+		),
+		["<M-y>"] = cmp.mapping(
+			cmp.mapping.confirm {
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = false,
+			},
+			{ "i", "c" }
+		),
+
+		["<c-space>"] = cmp.mapping {
+			i = cmp.mapping.complete(),
+			c = function(
+				_ --[[fallback]]
+			)
+				if cmp.visible() then
+					if not cmp.confirm { select = true } then
+						return
+					end
+				else
+					cmp.complete()
+				end
+			end,
+		},
+
+		-- ["<tab>"] = false,
+		["<tab>"] = cmp.config.disable,
+
 	}),
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
+		{ name = "nvim_lua", priority = 1 },
+		{ name = "nvim_lsp", priority = 2 },
+		{ name = "luasnip",  priority = 3 },
+		{ name = "copilot",  priority = 4, max_item_count = 1, },
 	},
+	{
+		{ name = "path" },
+		{ name = "buffer", keyword_length = 5 },
+	}
 })
