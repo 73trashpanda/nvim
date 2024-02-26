@@ -1,8 +1,16 @@
-local plugins = {
+return {
 	{
 		"catppuccin/nvim",
 		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
+		opts = {
+			flavour = "mocha",
+			transparent_background = true,
+			integrations = {
+				fidget = true,
+				cmp = true,
+			}
+		}
 	},
 
 	{
@@ -113,6 +121,37 @@ local plugins = {
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
 		cmd = "Copilot",
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+			filetypes = {
+				yaml = false,
+				terraform = false,
+				markdown = false,
+				gitcommit = false,
+				help = false,
+				gitrebase = false,
+				hgcommit = false,
+				svn = false,
+				cvs = false,
+				["."] = false,
+				sh = function()
+					if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+						-- disable for .env files
+						return false
+					end
+					return true
+				end,
+			},
+		},
+		keys= {
+			{ 'n', '<leader>aco',
+				':lua if vim.g.copilot_enabled then vim.cmd("Copilot disable"); vim.g.copilot_enabled = false else vim.cmd("Copilot enable"); vim.g.copilot_enabled = true end<CR>',
+				"Toggle Copilot" }
+		},
+		config = function()
+			require("copilot").setup()
+		end,
 	},
 	{ "zbirenbaum/copilot-cmp" },
 	{ "David-Kunz/gen.nvim" },
@@ -121,6 +160,26 @@ local plugins = {
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = "VeryLazy",
+		opts = {
+			filetypes = {
+				"typescript",
+				"typescriptreact",
+				"javascript",
+				"javascriptreact",
+				"css",
+				"html",
+				"astro",
+				"lua",
+			},
+			user_default_options = {
+				rgb_fn = true,
+				tailwind = "both",
+			},
+			buftypes = {
+				-- '*', -- seems like this doesn't work with the float window, but works with the other `buftype`s.
+				-- Not sure if the window has a `buftype` at all
+			},
+		}
 	},
 	{
 		"mbbill/undotree",
@@ -151,5 +210,3 @@ local plugins = {
 		},
 	}
 }
-
-return plugins
