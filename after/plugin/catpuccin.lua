@@ -9,5 +9,6 @@ catppuccin.setup({
 	transparent_background = true,
 	integrations = {
 		fidget = true,
+		cmp = true,
 	}
 })
