@@ -35,6 +35,7 @@ local plugins = {
 			"saadparwaiz1/cmp_luasnip",
 		},
 	},
+	{ "onsails/lspkind.nvim" },
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",

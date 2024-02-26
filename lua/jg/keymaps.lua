@@ -27,7 +27,7 @@ vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system c
 -- Copy current line and all lines below to system clipboard
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy current line and all lines below to system clipboard" })
 
-vim.keymap.set("n", "<leader>yb", [[%y+]], { desc = "[Y]ank [B]uffer to system clipboard" })
+vim.keymap.set("n", "<leader>yb", ":%y+<CR>", { desc = "[Y]ank [B]uffer to system clipboard" })
 
 -- Delete selected text and place it in the default register
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
