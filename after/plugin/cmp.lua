@@ -113,6 +113,9 @@ cmp.setup({
 
 		-- ["<tab>"] = false,
 		["<tab>"] = cmp.config.disable,
+		["<Up>"] = cmp.config.disable,
+		["<Down>"] = cmp.config.disable,
+
 
 	}),
 	sources = {
