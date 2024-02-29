@@ -54,3 +54,5 @@ vim.opt.listchars = {
 	eol = '↵',
 	tab = '» ',
 }
+
+vim.opt.spellfile = vim.fn.stdpath('config') .. '/spell/en.utf-8.add'
