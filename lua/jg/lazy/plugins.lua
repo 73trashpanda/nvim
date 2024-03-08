@@ -39,7 +39,6 @@ local plugins = {
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
-		lazy = true,
 		build = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		end,
@@ -47,15 +46,12 @@ local plugins = {
 
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		lazy = true,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		lazy = true,
 	},
 	{
-		"elgiano/nvim-treesitter-angular",
-		branch = "topic/jsx-fix",
+		"nvim-treesitter/playground",
 	},
 
 	-- Git related plugins
