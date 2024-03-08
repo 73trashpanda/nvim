@@ -22,3 +22,11 @@ vim.api.nvim_create_user_command(
 		-- Remove all lines that do not start with "Caused by:"
 		vim.cmd('g/Caused by:/normal O')
 	end, {})
+
+vim.api.nvim_create_user_command('ToggleRelNum', function()
+	if vim.wo.relativenumber then
+		vim.wo.relativenumber = false
+	else
+		vim.wo.relativenumber = true
+	end
+end, {})
