@@ -26,12 +26,13 @@ local on_attach = function(_, bufnr)
 	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
 	-- See `:help K` for why this keymap
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 	nmap("<leader>sd", vim.lsp.buf.signature_help, "[S]ignature [D]ocumentation")
 
 	-- Lesser used LSP functionality
+	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end,
+		{ buffer = bufnr, desc = "Signature [H]elp" })
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -65,6 +66,7 @@ local servers = {
 	gopls = {
 		filestypes = { "go", "gomod", "gowork", "gotmpl" },
 		gopls = {
+			gofumpt = true,
 			completeUnimported = true,
 			usePlaceholders = true,
 			analyses = {
